@@ -49,7 +49,7 @@ ax = 0:1:len_x-1;
 stem(ax,x_orig); 
 xlabel('samples n ->'); 
 ylabel('amplitude'); 
-title('NITHTHISH - Input sequence x(n)'); 
+title('Input sequence x(n)'); 
 
 %Displaying the magnitude and phase of the dft sequence 
 %We need to plot the values from k = 0 till N-1. 
