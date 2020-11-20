@@ -1,0 +1,35 @@
+clc;  
+close all;  
+
+fprintf('Program for CHEBYSHEV IIR Bandpass analog filter\n\n');  
+
+OMEGAS1=input('Please enter the stop edge frequency in rad/s:');  
+OMEGAP1=input('Please enter the pass edge frequency in rad/s:'); 
+OMEGAP2=input('Please enter the pass edge frequency in rad/s:');  
+OMEGAS2=input('Please enter the stop edge frequency in rad/s:');  
+
+rp = input('\nPlease enter the passband ripple in dB:');
+rs = input('Please enter the stopband attenuation in dB:');  
+
+OMEGAP = [OMEGAP1 OMEGAP2];  
+OMEGAS = [OMEGAS1 OMEGAS2];  
+[N wc]=cheb1ord(OMEGAP,OMEGAS,rp,rs,'s');  
+[b a]=cheby1(N,rp,wc,'s');  
+
+omega=0:1:2*OMEGAS2;  
+[h omega] = freqs(b,a,omega);  
+
+mag_h=abs(h);
+figure(1);  
+subplot(2,1,1); 
+plot(omega,mag_h);  
+xlabel('angular frequency i.e. omega -->');  
+ylabel('Gain -->');  
+title(' Magnitude response of BPF');  
+
+angle_h = angle(h);  
+subplot(2,1,2);
+plot(omega,angle_h)  
+xlabel('angular frequency i.e. omega -->');  
+ylabel('Phase in radian-->'); 
+title('Phase response of BPF'); 
