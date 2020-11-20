@@ -1,0 +1,39 @@
+clc;  
+close all;
+
+fprintf('Program for CHEBYSHEVIIR BANDSTOP analog filter\n\n'); 
+
+OMEGAP1=input('Please enter the pass edge frequency in rad/s:');  
+OMEGAS1=input('Please enter the stop edge frequency in rad/s:');  
+OMEGAS2=input('Please enter the stop edge frequency in rad/s:');  
+OMEGAP2=input('Please enter the pass edge frequency in rad/s:');  
+
+delp = input('\nenter the passband magnitude:');  
+dels = input('\nenter the stopband magnintude:'); 
+
+rp = -20*log10(delp);  
+rs = -20*log10(dels);  
+
+OMEGAP = [OMEGAP1 OMEGAP2];  
+OMEGAS = [OMEGAS1 OMEGAS2]; 
+
+[N wc]=cheb1ord(OMEGAP,OMEGAS,rp,rs,'s');  
+[b a]=cheby1(N,rp,wc,'stop','s');  
+
+omega=0:1:2*OMEGAP2;
+[h omega]=freqs(b,a,omega);
+
+mag_h=abs(h);  
+figure(1);  
+subplot(2,1,1);  
+plot(omega,mag_h);  
+xlabel('angular frequency i.e. omega -->');  
+ylabel('Gain-->');  
+title('NITHTHISH - Magnitude response of BSF');  
+
+angle_h = angle(h);  
+subplot(2,1,2);  
+plot(omega,angle_h)  
+xlabel('angular frequency i.e. omega -->');  
+ylabel('Phase in radian-->');  
+title('Phase response of BSF');   
