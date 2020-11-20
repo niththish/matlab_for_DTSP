@@ -29,7 +29,7 @@ subplot(2,1,1);
 plot(omega,mag_h);  
 xlabel('angular frequency i.e. omega -->');  
 ylabel('Gain-->');  
-title('NITHTHISH - Magnitude response of BSF');  
+title(' Magnitude response of BSF');  
 
 angle_h = angle(h);  
 subplot(2,1,2);  
